@@ -34,7 +34,7 @@ def shorten():
         return jsonify({"error": "URL cannot be empty"}), 400
 
     if not original_url.startswith(("http://", "https://")):
-        return jsonify({"error": "URL must start with http:// or https://"}), 400
+        return jsonify({"error": "URL must start with http(s)://"}), 400
 
     # Re-use existing code if URL was already shortened
     if original_url in db.values():
