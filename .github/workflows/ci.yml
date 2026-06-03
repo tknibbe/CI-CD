@@ -35,4 +35,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: build docker image
-        run: docker build -t url-shortener
+        run: docker build -t url-shortener .
