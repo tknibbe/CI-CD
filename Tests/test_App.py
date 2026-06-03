@@ -32,13 +32,13 @@ def test_shorten_double(client):
     assert "short_url" in res.get_json()
 
 
-def test_shorten_no_URL(client): 
+def test_shorten_no_URL(client):
     res = client.post("/shorten")
     assert res.status_code == 400
 
 
 def test_shorten_nvalid_URL(client):
-    res = client.post("/shorten", json={"url":"google.com"})
+    res = client.post("/shorten", json={"url": "google.com"})
     assert res.status_code == 400
 
 
@@ -54,4 +54,3 @@ def test_redirect_unknown_code(client):
     code = "unknown_code"
     res = client.get(code)
     assert res.status_code == 404
-
