@@ -1,0 +1,34 @@
+name: deploy
+
+on:
+  push:
+    branches: ["dev", "main"]
+
+jobs:
+  deploy-test:
+    if: github.ref_name == 'dev'
+    name: deploy to test
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: deploy to test
+        run: echo "deploying to test environment"
+
+  deploy-staging:
+    if: github.ref_name == 'main'
+    name: deploy to staging
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: deploy to staging
+        run: echo "deploying to staging environment"
+
+  deploy-prod:
+    needs: deploy-staging
+    if: github.ref_name == 'main'
+    name: deploy to prod
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: deploy to prod
+        run: echo "deploying to prod environment"
