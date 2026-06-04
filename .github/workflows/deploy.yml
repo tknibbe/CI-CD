@@ -1,12 +1,15 @@
 name: deploy
 
 on:
-  push:
-    branches: ["dev", "main"]
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main, dev]
+    types: 
+      - completed
 
 jobs:
   deploy-test:
-    if: github.ref_name == 'dev'
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'dev'
     name: deploy to test
     runs-on: ubuntu-latest
     environment: test
@@ -15,7 +18,7 @@ jobs:
         run: echo "deploying to test environment"
 
   deploy-staging:
-    if: github.ref_name == 'main'
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
     name: deploy to staging
     runs-on: ubuntu-latest
     environment: staging
@@ -25,7 +28,7 @@ jobs:
 
   deploy-prod:
     needs: deploy-staging
-    if: github.ref_name == 'main'
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
     name: deploy to prod
     runs-on: ubuntu-latest
     environment: prod
