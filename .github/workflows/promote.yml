@@ -11,3 +11,5 @@ jobs:
     steps:
       - name: deploy to staging
         run: echo "deploying to staging environment"
+      - name: health check
+        run: sleep 3 && curl -f http://localhost:${{ vars.PORT }}/health
