@@ -1,5 +1,4 @@
-name: build docker image
-
+name: release to prod
 on:
   push:
     tags:
