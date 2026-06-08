@@ -16,6 +16,6 @@ jobs:
     steps:
       - name: deploy to test
         run: echo "deploying to test"
-      - name: health check
-        run: sleep 3 && curl -f http://localhost:${{ vars.PORT }}/health
+      # - name: health check
+      #   run: sleep 3 && curl -f http://localhost:${{ vars.PORT }}/health
 

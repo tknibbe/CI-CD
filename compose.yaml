@@ -1,0 +1,26 @@
+services:
+
+  test:
+    build: .
+    ports:
+      - "8001:5000"
+    environment:
+      - ENV_NAME=T
+      - PORT = 8001
+
+
+  staging:
+    build: .
+    ports:
+      - "8002:5000"
+    environment:
+      - ENV_NAME=S
+      - PORT = 8002
+
+  prod:
+    build: .
+    ports:
+      - "8003:5000"
+    environment:
+      - ENV_NAME=P
+      - PORT = 8003
