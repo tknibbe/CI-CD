@@ -1,0 +1,24 @@
+name: build docker image
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    name: build docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build
+        run: docker build -t url-shortener:${{ github.ref_name }} .
+
+  deploy-prod:
+    name: deploy to prod
+    needs: build
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: deploy to prod
+        run: echo "deploying to prod environment"

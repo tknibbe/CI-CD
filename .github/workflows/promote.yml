@@ -1,0 +1,13 @@
+name: promote
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    name: deploy to staging
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: deploy to staging
+        run: echo "deploying to staging environment"
